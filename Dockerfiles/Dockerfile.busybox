@@ -1,0 +1,20 @@
+FROM busybox
+
+#COPY src /app # When use CP, we have to create folder structure which is done automatically by ADD
+#ADD src.tar /app # Result in /app/src/index.html (the tar would be expanded automatically)
+ADD src /app
+CMD ["2nd-param"]
+#ENTRYPOINT ["/bin/echo", "1st-param"]
+CMD ["/bin/echo","cmd"]
+
+# docker run -it my-busybox       -> 1st-param 2nd-param
+# docker run -it my-busybox haha  -> 1st-param hello
+
+# if both ENTRYPOINT and CMD exist, CMD would be passed as additional params to ENTRYPOINT \
+# e.g. docker run -it my-busybox -> 1st-param /bin/echo cmd
+
+# if CMD only, the param of CMD could be replaced by given param when user run the container
+
+# ENTRYPOINT is used for running application/daemon/service etc.. it would be run in any cases
+
+# shell & exec modes, exec -> CMD & ENTRYPOINT; shell -> RUN

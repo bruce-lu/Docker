@@ -1,0 +1,5 @@
+FROM openjdk:8-jdk-alpine
+ADD dist /app
+WORKDIR /app
+CMD ["extra parameter"]
+ENTRYPOINT ["./my-app-script.sh", "param"]
